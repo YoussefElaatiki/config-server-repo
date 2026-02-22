@@ -1,0 +1,27 @@
+server:
+  port: 8079
+spring:
+  application:
+    name: 'gateway'
+  cloud:
+    gateway:
+      routes:
+      - id: patients
+        uri: lb://PATIENTS
+        predicates:
+          - Path=/api/patient/**
+
+      - id: appointments
+        uri: lb://APPOINTMENTS
+        predicates:
+          - Path=/api/appointments/**
+
+      - id: medical-folder
+        uri: lb://MEDICAL-FOLDER
+        predicates:
+          - Path=/api/medical-folder/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
